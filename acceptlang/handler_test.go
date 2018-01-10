@@ -10,7 +10,7 @@ import (
 
 func newMetadataContext(ctx context.Context, val string) context.Context {
 	md := metadata.Pairs(DefaultAcceptLangKey, val)
-	return metadata.NewContext(ctx, md)
+	return metadata.NewIncomingContext(ctx, md)
 }
 
 func TestHandleAcceptLanguage(t *testing.T) {
