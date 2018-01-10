@@ -41,7 +41,7 @@ func FromContext(ctx context.Context) AcceptLanguages {
 }
 
 func HandleAcceptLanguage(ctx context.Context) AcceptLanguages {
-	md, ok := metadata.FromContext(ctx)
+	md, ok := metadata.FromIncomingContext(ctx)
 	if !ok {
 		return nil
 	}
