@@ -4,8 +4,8 @@ import (
 	"bytes"
 	"testing"
 
-	"github.com/mercari/go-grpc-interceptor/panichandler"
-	"github.com/mercari/go-grpc-interceptor/zap/zapctx"
+	"github.com/eltorocorp/go-grpc-request-id-interceptor/panichandler"
+	"github.com/eltorocorp/go-grpc-request-id-interceptor/zap/zapctx"
 	"github.com/uber-go/zap"
 	"golang.org/x/net/context"
 	"google.golang.org/grpc"

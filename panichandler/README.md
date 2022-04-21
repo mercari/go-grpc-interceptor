@@ -6,13 +6,13 @@ panichandler is an interceptor to protect a process from aborting by panic and r
 
 ```
 import (
-	"github.com/mercari/go-grpc-interceptor/panichandler"
+ "github.com/eltorocorp/go-grpc-request-id-interceptor/panichandler"
 )
 
 func main() {
-	uIntOpt := grpc.UnaryInterceptor(panichandler.UnaryServerInterceptor)
-	sIntOpt := grpc.StreamInterceptor(panichandler.StreamServerInterceptor)
-	grpc.NewServer(uIntOpt, sIntOpt)
+ uIntOpt := grpc.UnaryInterceptor(panichandler.UnaryServerInterceptor)
+ sIntOpt := grpc.StreamInterceptor(panichandler.StreamServerInterceptor)
+ grpc.NewServer(uIntOpt, sIntOpt)
 }
 ```
 
@@ -22,16 +22,16 @@ You can write custom panic handler in case of panic. Use `InstallPanicHandler`.
 
 ```
 func main() {
-	panichandler.InstallPanicHandler(func(ctx context.Context, r interface{}) {
-		fmt.Printf("panic happened: %v", r)
-	}
+ panichandler.InstallPanicHandler(func(ctx context.Context, r interface{}) {
+  fmt.Printf("panic happened: %v", r)
+ }
 }
 ```
 
 ### Built-in custom panic handler
 
 - panichandler.LogPanicDump
- - `debug.Stack()` to stderr
+- `debug.Stack()` to stderr
 - glog.LogPanicStackMultiLine
   - show stack trace in multi line by glog
 - zap.LogPanicWithStackTrace

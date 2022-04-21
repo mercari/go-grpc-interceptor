@@ -4,7 +4,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/renstrom/shortuuid"
+	"github.com/google/uuid"
 	"golang.org/x/net/context"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/metadata"
@@ -63,7 +63,7 @@ func TestUnaryServerWithoutReqeustID(t *testing.T) {
 }
 
 func TestUnaryServerWithReqeustID(t *testing.T) {
-	requestID := shortuuid.New()
+	requestID := uuid.NewString()
 
 	unaryHandler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		if got, want := FromContext(ctx), requestID; got != want {
@@ -86,7 +86,7 @@ func TestUnaryServerWithReqeustID(t *testing.T) {
 }
 
 func TestUnaryServerWithReqeustIDChain(t *testing.T) {
-	requestID := shortuuid.New()
+	requestID := uuid.NewString()
 
 	unaryHandler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		gotRequestID := FromContext(ctx)
@@ -151,7 +151,7 @@ func TestStreamServerWithoutRequestID(t *testing.T) {
 }
 
 func TestStreamServerWithRequestID(t *testing.T) {
-	requestID := shortuuid.New()
+	requestID := uuid.NewString()
 
 	streamHandler := func(srv interface{}, stream grpc.ServerStream) error {
 		requestID := FromContext(stream.Context())
@@ -177,7 +177,7 @@ func TestStreamServerWithRequestID(t *testing.T) {
 }
 
 func TestStreamServerWithRequestIDChain(t *testing.T) {
-	requestID := shortuuid.New()
+	requestID := uuid.NewString()
 
 	streamHandler := func(srv interface{}, stream grpc.ServerStream) error {
 		gotRequestID := FromContext(stream.Context())

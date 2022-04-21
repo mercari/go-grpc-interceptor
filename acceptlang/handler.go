@@ -5,7 +5,7 @@ import (
 	"strconv"
 	"strings"
 
-	multiint "github.com/mercari/go-grpc-interceptor/multiinterceptor"
+	multiint "github.com/eltorocorp/go-grpc-request-id-interceptor/multiinterceptor"
 	"golang.org/x/net/context"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/metadata"
@@ -41,7 +41,7 @@ func FromContext(ctx context.Context) AcceptLanguages {
 }
 
 func HandleAcceptLanguage(ctx context.Context) AcceptLanguages {
-	md, ok := metadata.FromContext(ctx)
+	md, ok := metadata.FromIncomingContext(ctx)
 	if !ok {
 		return nil
 	}

@@ -5,7 +5,7 @@ import (
 
 	"google.golang.org/grpc"
 
-	multiint "github.com/mercari/go-grpc-interceptor/multiinterceptor"
+	multiint "github.com/eltorocorp/go-grpc-request-id-interceptor/multiinterceptor"
 )
 
 type requestIDKey struct{}

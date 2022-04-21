@@ -3,7 +3,7 @@ package prometheus
 import (
 	"time"
 
-	"github.com/mercari/go-grpc-interceptor/instrument"
+	"github.com/eltorocorp/go-grpc-request-id-interceptor/instrument"
 	prom "github.com/prometheus/client_golang/prometheus"
 )
 

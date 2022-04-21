@@ -6,19 +6,19 @@ multiinterceptor is a simple library which provides a function to chain multiple
 
 ```go
 import (
-	multiint "github.com/mercari/go-grpc-interceptor/multiinterceptor"
+ multiint "github.com/eltorocorp/go-grpc-request-id-interceptor/multiinterceptor"
 )
 
 func main() {
-	uIntOpt := grpc.UnaryInterceptor(multiint.NewMultiUnaryServerInterceptor(
-		fooUnaryInterceptor,
-		barUnaryInterceptor,
-	))
-	sIntOpt := grpc.StreamInterceptor(multiint.NewMultiStreamServerInterceptor(
-		fooStreamInterceptor,
-		barStreamInterceptor,
-	))
-	grpc.NewServer(uIntOpt, sIntOpt)
+ uIntOpt := grpc.UnaryInterceptor(multiint.NewMultiUnaryServerInterceptor(
+  fooUnaryInterceptor,
+  barUnaryInterceptor,
+ ))
+ sIntOpt := grpc.StreamInterceptor(multiint.NewMultiStreamServerInterceptor(
+  fooStreamInterceptor,
+  barStreamInterceptor,
+ ))
+ grpc.NewServer(uIntOpt, sIntOpt)
 }
 ```
 
@@ -31,11 +31,10 @@ And you can simply wrap context with `context.WithValue` and pass it to next han
 
 ```go
 func ExampleUnaryInterceptor(ctx context.Context, req interface{}, info *grpc.UnaryServerInfo, handler grpc.UnaryHandler) (interface{}, error) {
-	newctx := context.WithValue(ctx, "some_key", "some_value")
-	return handler(newctx, req)
+ newctx := context.WithValue(ctx, "some_key", "some_value")
+ return handler(newctx, req)
 }
 ```
-
 
 ### Streaming RPC
 
@@ -44,9 +43,9 @@ If you want to create a new context from the context, use `NewServerStreamWithCo
 
 ```go
 func ExampleStreamingInterceptor(srv interface{}, stream grpc.ServerStream, info *grpc.StreamServerInfo, handler grpc.StreamHandler) error {
-	ctx := stream.Context()
-	newctx := context.WithValue(ctx, "some_key", "some_value")
-	newStream := multiint.NewServerStreamWithContext(stream, newctx)
-	return handler(srv, newStream)
+ ctx := stream.Context()
+ newctx := context.WithValue(ctx, "some_key", "some_value")
+ newStream := multiint.NewServerStreamWithContext(stream, newctx)
+ return handler(srv, newStream)
 }
 ```

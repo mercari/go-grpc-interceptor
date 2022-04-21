@@ -1,7 +1,7 @@
 package i18n
 
 import (
-	"github.com/mercari/go-grpc-interceptor/acceptlang"
+	"github.com/eltorocorp/go-grpc-request-id-interceptor/acceptlang"
 	"github.com/nicksnyder/go-i18n/i18n"
 	"golang.org/x/net/context"
 	"google.golang.org/grpc"
