@@ -1,9 +1,11 @@
 package xrequestid
 
 import (
-	multiint "github.com/mercari/go-grpc-interceptor/multiinterceptor"
-	"golang.org/x/net/context"
+	"context"
+
 	"google.golang.org/grpc"
+
+	multiint "github.com/mercari/go-grpc-interceptor/multiinterceptor"
 )
 
 type requestIDKey struct{}
