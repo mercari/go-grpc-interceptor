@@ -11,13 +11,20 @@ func (a optionApplyer) apply(opt *options) {
 }
 
 type options struct {
-	chainRequestID bool
-	validator      requestIDValidator
+	chainRequestID   bool
+	persistRequestID bool // if true, attach request id to outgoing context
+	validator        requestIDValidator
 }
 
 func ChainRequestID() Option {
 	return optionApplyer(func(opt *options) {
 		opt.chainRequestID = true
+	})
+}
+
+func PersistRequestID() Option {
+	return optionApplyer(func(opt *options) {
+		opt.persistRequestID = true
 	})
 }
 
