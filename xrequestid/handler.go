@@ -64,3 +64,8 @@ func FromContext(ctx context.Context) string {
 	}
 	return id
 }
+
+// Create a context with the private requestIDKey{} for testing
+func ContextWithID(ctx context.Context, requestID string) context.Context {
+	return context.WithValue(ctx, requestIDKey{}, requestID)
+}
