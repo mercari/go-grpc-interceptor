@@ -4,6 +4,7 @@ import (
 	"context"
 
 	"google.golang.org/grpc"
+	"google.golang.org/grpc/metadata"
 
 	multiint "github.com/eltorocorp/go-grpc-request-id-interceptor/multiinterceptor"
 )
@@ -24,6 +25,9 @@ func UnaryServerInterceptor(opt ...Option) grpc.UnaryServerInterceptor {
 		} else {
 			requestID = HandleRequestID(ctx, opts.validator)
 		}
+		if opts.persistRequestID {
+			ctx = metadata.AppendToOutgoingContext(ctx, DefaultXRequestIDKey, requestID)
+		}
 		ctx = context.WithValue(ctx, requestIDKey{}, requestID)
 		return handler(ctx, req)
 	}
@@ -43,6 +47,9 @@ func StreamServerInterceptor(opt ...Option) grpc.StreamServerInterceptor {
 			requestID = HandleRequestIDChain(ctx, opts.validator)
 		} else {
 			requestID = HandleRequestID(ctx, opts.validator)
+		}
+		if opts.persistRequestID {
+			ctx = metadata.AppendToOutgoingContext(ctx, DefaultXRequestIDKey, requestID)
 		}
 		ctx = context.WithValue(ctx, requestIDKey{}, requestID)
 		stream = multiint.NewServerStreamWithContext(stream, ctx)

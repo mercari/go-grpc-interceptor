@@ -7,6 +7,7 @@ xrequestid is an grpc interceptor which receives request id from metadata and se
 - Use `uuid` instead of `shortuuid` since we are not passing it through context and not the url
 - Fixed the Compilation errors due to the depricated `metadata.FromContext` function
 - Added a `go.mod` and replaced imports with the go mod equivilent
+- Add an option `persistRequestID` if you would like to add the request ID to the outgoing context
 
 ## Usage
 
