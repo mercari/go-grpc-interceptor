@@ -24,6 +24,7 @@ require (
 	github.com/google/uuid v1.3.0
 	github.com/pelletier/go-toml v1.2.0 // indirect
 	github.com/prometheus/client_golang v1.12.1
+	github.com/sirupsen/logrus v1.8.1
 	go.uber.org/zap v1.21.0
 	golang.org/x/net v0.0.0-20220420153159-1850ba15e1be
 	golang.org/x/sys v0.0.0-20220412211240-33da011f77ad // indirect

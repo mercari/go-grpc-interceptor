@@ -12,7 +12,8 @@ func (a optionApplyer) apply(opt *options) {
 
 type options struct {
 	chainRequestID   bool
-	persistRequestID bool // if true, attach request id to outgoing context
+	persistRequestID bool
+	logRequest       bool
 	validator        requestIDValidator
 }
 
@@ -22,9 +23,17 @@ func ChainRequestID() Option {
 	})
 }
 
+// Attach the request id to the outgoing context
 func PersistRequestID() Option {
 	return optionApplyer(func(opt *options) {
 		opt.persistRequestID = true
+	})
+}
+
+// Logs the incoming request with the request id and the method destination
+func LogRequest() Option {
+	return optionApplyer(func(opt *options) {
+		opt.logRequest = true
 	})
 }
 

@@ -28,6 +28,9 @@ func UnaryServerInterceptor(opt ...Option) grpc.UnaryServerInterceptor {
 		if opts.persistRequestID {
 			ctx = metadata.AppendToOutgoingContext(ctx, DefaultXRequestIDKey, requestID)
 		}
+		if opts.logRequest {
+			logRequestWithID(req, requestID, info.FullMethod)
+		}
 		ctx = context.WithValue(ctx, requestIDKey{}, requestID)
 		return handler(ctx, req)
 	}
@@ -50,6 +53,9 @@ func StreamServerInterceptor(opt ...Option) grpc.StreamServerInterceptor {
 		}
 		if opts.persistRequestID {
 			ctx = metadata.AppendToOutgoingContext(ctx, DefaultXRequestIDKey, requestID)
+		}
+		if opts.logRequest {
+			logRequestWithID("Contains StreamData", requestID, info.FullMethod)
 		}
 		ctx = context.WithValue(ctx, requestIDKey{}, requestID)
 		stream = multiint.NewServerStreamWithContext(stream, ctx)
