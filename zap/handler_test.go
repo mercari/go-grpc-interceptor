@@ -5,7 +5,7 @@ import (
 	"testing"
 
 	"github.com/mercari/go-grpc-interceptor/zap/zapctx"
-	"github.com/uber-go/zap"
+	"go.uber.org/zap"
 	"golang.org/x/net/context"
 	"google.golang.org/grpc"
 )
